@@ -2,6 +2,7 @@ package com.tuyalink.iot;
 
 import com.tuyalink.iot.listener.MqttMessageListener;
 import com.tuyalink.iot.listener.PublishCallBack;
+import com.tuyalink.iot.messagebuilder.MessageComposer;
 import com.tuyalink.iot.sign.TuyaMqttSign;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -27,12 +28,31 @@ import static org.eclipse.paho.client.mqttv3.MqttConnectOptions.MQTT_VERSION_3_1
  * @author Tuya inc.
  */
 public class TuyaMQTT3ClientDemo {
+    public static boolean switchStatus = true;
+    public static MqttClient sampleClient = null;
+//
+//
+    public static String productId = "rhn7iy0zchoxccyz"; // "nonxw4nnvnqamyto";// "gm**********qf";
+    public static String deviceId = "260cb59f8476991853yn1v"; // "2688d6896a448c7cebav0u";// ""6cc****************xb";
+    public static String deviceSecret = "6255c7d233633728" ; // "728b0f106f5a2b9a"; //""ff***********17";
 
     public static void main(String[] args) throws Exception {
         // TuyaLink device configuration is as follows, you must change it
-        String productId = "gm**********qf";
-        String deviceId = "6cc****************xb";
-        String deviceSecret = "ff***********17";
+        /*
+        dev 123456
+
+        ProductID：nonxw4nnvnqamyto
+        DeviceID：2688d6896a448c7cebav0u
+        DeviceSecret：728b0f106f5a2b9a
+
+
+        dev 654321
+
+        ProductID：rhn7iy0zchoxccyz
+        DeviceID：260cb59f8476991853yn1v
+        DeviceSecret：6255c7d233633728
+
+         */
 
         // Online environment domain name
         String broker = "ssl://m1.tuyacn.com:8883";
@@ -46,7 +66,7 @@ public class TuyaMQTT3ClientDemo {
         MemoryPersistence persistence = new MemoryPersistence();
         try {
             // Paho Mqtt client
-            MqttClient sampleClient = new MqttClient(broker, sign.getClientId(), persistence);
+            sampleClient = new MqttClient(broker, sign.getClientId(), persistence);
 
             // Paho Mqtt connect parameters
             MqttConnectOptions connOpts = new MqttConnectOptions();
@@ -71,34 +91,7 @@ public class TuyaMQTT3ClientDemo {
 
             //****************************************device property report********************************************
 
-            // Property report topic
-            String topic = "tylink/" + deviceId + "/thing/property/report";
-            // Current timestamp
-            long timestamp = System.currentTimeMillis();
-            // Property report content
-            String content = "{\n" +
-                    "\t\"msgId\":\"45lkj3551234002\",\n" +
-                    "  \t\"time\":" + timestamp + ",\n" +
-                    "\t\"data\":{\n" +
-                    "    \t\"switch_led_1\":{\n" +
-                    "        \t\"value\":true,\n" +
-                    "        \t\"time\": " + timestamp + "  \n" +
-                    "        }\n" +
-                    "\t}\n" +
-                    "}";
-
-            MqttMessage message = new MqttMessage(content.getBytes());
-            message.setQos(1);
-            sampleClient.publish(topic, message);
-            System.out.println("publish topic: " + topic);
-            System.out.println("publish content: " + content);
-
-            //Thread.sleep(20000);
-
-            //Paho Mqtt disconnect
-            //sampleClient.disconnect();
-            //System.out.println("Disconnected");
-            //System.exit(0);
+            MessageComposer.buildMesaage(switchStatus);
         } catch (MqttException e) {
             System.out.println("reason " + e.getReasonCode());
             System.out.println("msg " + e.getMessage());
