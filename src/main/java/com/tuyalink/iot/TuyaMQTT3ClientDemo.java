@@ -32,9 +32,9 @@ public class TuyaMQTT3ClientDemo {
     public static MqttClient sampleClient = null;
 //
 //
-    public static String productId = "rhn7iy0zchoxccyz"; // "nonxw4nnvnqamyto";// "gm**********qf";
-    public static String deviceId = "260cb59f8476991853yn1v"; // "2688d6896a448c7cebav0u";// ""6cc****************xb";
-    public static String deviceSecret = "6255c7d233633728" ; // "728b0f106f5a2b9a"; //""ff***********17";
+    public static String productId = "xujvna1s3syugjaw"; // ""rhn7iy0zchoxccyz"; // "nonxw4nnvnqamyto";// "gm**********qf";
+    public static String deviceId = "26fc035ac1a4459d23yzoi"; // "260cb59f8476991853yn1v"; // "2688d6896a448c7cebav0u";// ""6cc****************xb";
+    public static String deviceSecret = "2d7018f0d46484a5"; // "6255c7d233633728" ; // "728b0f106f5a2b9a"; //""ff***********17";
 
     public static void main(String[] args) throws Exception {
         // TuyaLink device configuration is as follows, you must change it
