@@ -18,7 +18,7 @@ public class MessageComposer {
 
         String content = "{\n" +
                 "\t\"msgId\":\"" + msgUUID + "\",\n" +
-                "\t\"msgId\":\"45lkj3551234002\",\n" +
+//                "\t\"msgId\":\"45lkj3551234002\",\n" +
                 "  \t\"time\":" + timestamp + ",\n" +
                 "\t\"data\":{\n" +
                 "    \t\"switch\":{\n" +
